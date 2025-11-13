@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OpenCV Edge Detection - Web Viewer</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+        
+        .container {
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            padding: 30px;
+            max-width: 900px;
+            width: 100%;
+        }
+        
+        h1 {
+            color: #333;
+            margin-bottom: 10px;
+            text-align: center;
+        }
+        
+        .subtitle {
+            color: #666;
+            text-align: center;
+            margin-bottom: 30px;
+            font-size: 14px;
+        }
+        
+        .viewer-section {
+            margin-bottom: 30px;
+        }
+        
+        #frameCanvas {
+            width: 100%;
+            max-width: 640px;
+            height: auto;
+            border: 2px solid #ddd;
+            border-radius: 8px;
+            display: block;
+            margin: 0 auto;
+            background: #000;
+        }
+        
+        .stats-container {
+            background: #f8f9fa;
+            border-radius: 8px;
+            padding: 20px;
+            margin-top: 20px;
+        }
+        
+        .stats-container h2 {
+            color: #333;
+            margin-bottom: 15px;
+            font-size: 18px;
+        }
+        
+        .stat-item {
+            display: flex;
+            justify-content: space-between;
+            padding: 8px 0;
+            border-bottom: 1px solid #e0e0e0;
+        }
+        
+        .stat-item:last-child {
+            border-bottom: none;
+        }
+        
+        .stat-label {
+            font-weight: 600;
+            color: #555;
+        }
+        
+        .stat-value {
+            color: #667eea;
+            font-weight: 500;
+        }
+        
+        .upload-section {
+            margin-top: 20px;
+            text-align: center;
+        }
+        
+        .upload-button {
+            background: #667eea;
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 14px;
+            font-weight: 500;
+            transition: background 0.3s;
+        }
+        
+        .upload-button:hover {
+            background: #5568d3;
+        }
+        
+        .upload-button input {
+            display: none;
+        }
+        
+        .info-box {
+            background: #e3f2fd;
+            border-left: 4px solid #2196f3;
+            padding: 15px;
+            margin-top: 20px;
+            border-radius: 4px;
+        }
+        
+        .info-box p {
+            color: #1976d2;
+            font-size: 14px;
+            line-height: 1.6;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🔍 OpenCV Edge Detection Viewer</h1>
+        <p class="subtitle">Web-based viewer for processed camera frames</p>
+        
+        <div class="viewer-section">
+            <canvas id="frameCanvas"></canvas>
+        </div>
+        
+        <div class="stats-container">
+            <h2>📊 Frame Statistics</h2>
+            <div id="statsContainer">
+                <div class="stat-item">
+                    <span class="stat-label">FPS:</span>
+                    <span class="stat-value">0</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-label">Resolution:</span>
+                    <span class="stat-value">0x0</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-label">Processing Time:</span>
+                    <span class="stat-value">0ms</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-label">Last Update:</span>
+                    <span class="stat-value">--</span>
+                </div>
+            </div>
+        </div>
+        
+        <div class="upload-section">
+            <label class="upload-button">
+                Upload Processed Frame
+                <input type="file" id="fileInput" accept="image/*">
+            </label>
+        </div>
+        
+        <div class="info-box">
+            <p>
+                <strong>Note:</strong> This is a demonstration viewer. In a production environment, 
+                frames would be received via WebSocket or HTTP endpoint from the Android app. 
+                The current implementation shows a sample edge-detected pattern.
+            </p>
+        </div>
+    </div>
+    
+    <script type="module" src="dist/index.js"></script>
+    <script>
+        // Handle file upload
+        document.getElementById('fileInput')?.addEventListener('change', (e) => {
+            const file = (e.target as HTMLInputElement).files?.[0];
+            if (file) {
+                // This would be handled by the App class in a real implementation
+                const reader = new FileReader();
+                reader.onload = (event) => {
+                    const img = new Image();
+                    img.onload = () => {
+                        const canvas = document.getElementById('frameCanvas') as HTMLCanvasElement;
+                        const ctx = canvas?.getContext('2d');
+                        if (canvas && ctx) {
+                            canvas.width = img.width;
+                            canvas.height = img.height;
+                            ctx.drawImage(img, 0, 0);
+                        }
+                    };
+                    img.src = event.target?.result as string;
+                };
+                reader.readAsDataURL(file);
+            }
+        });
+    </script>
+</body>
+</html>
+

@@ -1,0 +1,23 @@
+{
+  "name": "opencv-edge-detector-web",
+  "version": "1.0.0",
+  "description": "Web viewer for OpenCV edge detection results",
+  "main": "dist/index.js",
+  "scripts": {
+    "build": "tsc",
+    "dev": "tsc --watch",
+    "serve": "npx http-server . -p 8080"
+  },
+  "keywords": [
+    "opencv",
+    "edge-detection",
+    "typescript"
+  ],
+  "author": "",
+  "license": "MIT",
+  "devDependencies": {
+    "@types/node": "^20.10.0",
+    "typescript": "^5.3.3"
+  }
+}
+
