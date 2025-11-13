@@ -214,15 +214,5 @@ _Add screenshots or GIFs of the working app here_
 - [ ] Save processed frames to gallery
 - [ ] Adjustable edge detection parameters
 
-## 📄 License
 
-MIT License
-
-## 👤 Author
-
-RnD Intern Assessment Project
-
----
-
-**⚠️ Important**: This project requires proper Git version control. Ensure all changes are committed with meaningful commit messages.
 
