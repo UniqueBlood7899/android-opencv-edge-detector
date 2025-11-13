@@ -18,6 +18,8 @@ release/
 # Gradle files
 .gradle/
 build/
+*/build/
+**/build/
 
 # Local configuration file (sdk path, etc)
 local.properties
@@ -91,4 +93,24 @@ lint-results*.xml
 # Node modules (for web viewer)
 web/node_modules/
 web/dist/
+web/.gitignore
+
+# VS Code
+.vscode/
+
+# OpenCV SDK - Exclude unnecessary large files
+opencv-sdk/samples/
+opencv-sdk/sdk/java/
+opencv-sdk/sdk/build.gradle
+opencv-sdk/sdk/etc/
+opencv-sdk/sdk/libcxx_helper/
+opencv-sdk/sdk/native/3rdparty/
+opencv-sdk/sdk/native/libs/arm64-v8a/
+opencv-sdk/sdk/native/libs/armeabi-v7a/
+opencv-sdk/sdk/native/libs/x86/
+opencv-sdk/sdk/native/libs/x86_64/
+opencv-sdk/sdk/native/staticlibs/
+
+# Keep only JNI headers
+!opencv-sdk/sdk/native/jni/
 
