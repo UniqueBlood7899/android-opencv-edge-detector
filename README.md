@@ -182,10 +182,6 @@ opencv-edge-detector/
 - Efficient Mat memory management with `clone()`
 - FPS tracking and monitoring
 
-## 📸 Screenshots
-
-_Add screenshots or GIFs of the working app here_
-
 ## 🧪 Testing
 
 ### Android
